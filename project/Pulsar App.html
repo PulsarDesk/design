@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light" data-density="regular">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulsar — Desktop App</title>
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ---- dark theme tokens ---- */
+  :root[data-theme="dark"] {
+    --bg: oklch(0.17 0.012 265);
+    --bg-tint: oklch(0.2 0.015 265);
+    --surface: oklch(0.215 0.013 265);
+    --surface-2: oklch(0.245 0.013 265);
+    --surface-3: oklch(0.29 0.015 265);
+    --border: oklch(0.32 0.014 265);
+    --border-strong: oklch(0.42 0.016 265);
+    --text: oklch(0.95 0.008 265);
+    --text-muted: oklch(0.72 0.012 265);
+    --text-faint: oklch(0.56 0.012 265);
+    --shadow-xs: 0 1px 2px oklch(0 0 0 / 0.3);
+    --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.3), 0 2px 6px oklch(0 0 0 / 0.3);
+    --shadow: 0 2px 4px oklch(0 0 0 / 0.3), 0 8px 24px oklch(0 0 0 / 0.4);
+    --shadow-lg: 0 4px 8px oklch(0 0 0 / 0.3), 0 24px 60px -12px oklch(0 0 0 / 0.6);
+  }
+
+  html, body { height: 100%; }
+  body {
+    background:
+      radial-gradient(1100px 600px at 12% -5%, var(--accent-soft) 0%, transparent 55%),
+      radial-gradient(900px 600px at 100% 105%, var(--cyan-soft) 0%, transparent 52%),
+      var(--bg-tint);
+    display: grid; place-items: center; padding: 26px; overflow: hidden;
+  }
+  :root[data-theme="dark"] body {
+    background:
+      radial-gradient(1100px 600px at 12% -5%, oklch(0.3 0.08 272 / 0.5) 0%, transparent 55%),
+      radial-gradient(900px 600px at 100% 105%, oklch(0.3 0.06 215 / 0.4) 0%, transparent 52%),
+      oklch(0.13 0.012 265);
+  }
+
+  /* ---- window ---- */
+  .desktop { width: 100%; height: 100%; display: grid; place-items: center; }
+  .window {
+    width: min(1200px, 96vw); height: min(780px, 94vh);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    box-shadow: var(--shadow-lg); overflow: hidden; display: flex; flex-direction: column;
+  }
+  .content { flex: 1; position: relative; overflow: auto; padding: 32px; background: var(--bg); }
+  :root[data-density="compact"] .content { padding: 22px; }
+  :root[data-density="comfy"] .content { padding: 42px; }
+
+  /* ---- shared form atoms ---- */
+  .field { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border-strong);
+    border-radius: var(--r); padding: 11px 13px; background: var(--surface); transition: border-color var(--dur), box-shadow var(--dur); }
+  .field:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-ring); }
+  .field input::placeholder { color: var(--text-faint); }
+
+  .icon-btn { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--border);
+    background: var(--surface); border-radius: var(--r-sm); cursor: pointer; color: var(--text-muted);
+    transition: all var(--dur) var(--ease); }
+  .icon-btn:hover { border-color: var(--border-strong); color: var(--text); background: var(--surface-2); }
+
+  .recent-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border: 1px solid transparent;
+    border-radius: var(--r-sm); cursor: pointer; background: var(--surface-2); transition: all var(--dur) var(--ease); width: 100%; }
+  .recent-row:hover { background: var(--surface); border-color: var(--border); box-shadow: var(--shadow-xs); }
+
+  .device-tile { display: flex; align-items: center; gap: 14px; padding: 16px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-xs);
+    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur); }
+  .device-tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); border-color: var(--border-strong); }
+
+  .cfg-lab { font-size: 12.5px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+
+  /* range slider */
+  .prange { -webkit-appearance: none; appearance: none; width: 100%; height: 5px; border-radius: 3px;
+    background: var(--surface-3); margin-top: 10px; cursor: pointer; }
+  .prange::-webkit-slider-thumb { -webkit-appearance: none; width: 17px; height: 17px; border-radius: 50%;
+    background: var(--accent); border: 2.5px solid var(--surface); box-shadow: var(--shadow-xs); cursor: pointer; }
+  .prange::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 2.5px solid var(--surface); cursor: pointer; }
+
+  /* connecting animations */
+  .cring { position: absolute; width: 64px; height: 64px; border: 1.5px solid var(--accent); border-radius: 50%;
+    opacity: 0; animation: cringe 2.7s ease-out infinite; }
+  @keyframes cringe { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(3); opacity: 0; } }
+  .spin { animation: spin 0.8s linear infinite; display: block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes slideIn { from { transform: translateX(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+  /* content scrollbar */
+  .content::-webkit-scrollbar { width: 10px; }
+  .content::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 6px; border: 3px solid var(--bg); }
+  .content::-webkit-scrollbar-track { background: transparent; }
+
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="app/tweaks-panel.jsx"></script>
+<script type="text/babel" src="app/shell.jsx"></script>
+<script type="text/babel" src="app/screens-main.jsx"></script>
+<script type="text/babel" src="app/screens-session.jsx"></script>
+<script type="text/babel" src="app/screens-gaming.jsx"></script>
+<script type="text/babel" src="app/screens-settings.jsx"></script>
+<script type="text/babel" src="app/app.jsx"></script>
+</body>
+</html>

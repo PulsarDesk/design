@@ -1,0 +1,139 @@
+/* ===========================================================================
+   PULSAR — Design Tokens
+   Modern open-source remote desktop + game streaming.
+   Light-first, minimal, Linear/Vercel-adjacent. Electric indigo accent.
+   =========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ---- Surfaces & neutrals (cool near-whites) ---- */
+  --bg:            oklch(0.992 0.003 255);
+  --bg-tint:       oklch(0.975 0.006 262);
+  --surface:       oklch(1 0 0);
+  --surface-2:     oklch(0.978 0.005 258);
+  --surface-3:     oklch(0.962 0.007 260);
+  --border:        oklch(0.918 0.006 262);
+  --border-strong: oklch(0.862 0.009 262);
+
+  /* ---- Text ---- */
+  --text:        oklch(0.235 0.018 268);
+  --text-muted:  oklch(0.505 0.014 266);
+  --text-faint:  oklch(0.635 0.011 264);
+  --text-on-accent: oklch(0.99 0.01 272);
+
+  /* ---- Accents (shared L≈0.55, C≈0.18–0.20, hue varies) ---- */
+  --accent:        oklch(0.555 0.205 272);   /* electric indigo */
+  --accent-hover:  oklch(0.505 0.215 272);
+  --accent-press:  oklch(0.455 0.205 272);
+  --accent-soft:   oklch(0.955 0.035 272);
+  --accent-soft-2: oklch(0.915 0.06 272);
+  --accent-ring:   oklch(0.555 0.205 272 / 0.35);
+  --cyan:          oklch(0.62 0.15 215);      /* gaming / stream */
+  --cyan-soft:     oklch(0.955 0.035 215);
+
+  /* ---- Status ---- */
+  --ok:        oklch(0.63 0.15 158);
+  --ok-soft:   oklch(0.95 0.04 158);
+  --warn:      oklch(0.72 0.15 75);
+  --warn-soft: oklch(0.96 0.05 75);
+  --danger:    oklch(0.575 0.205 25);
+  --danger-soft: oklch(0.955 0.035 25);
+
+  /* ---- Type ---- */
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ---- Radii ---- */
+  --r-xs: 6px;
+  --r-sm: 9px;
+  --r:    13px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+  --r-pill: 999px;
+
+  /* ---- Shadows (soft, cool-toned) ---- */
+  --shadow-xs: 0 1px 2px oklch(0.3 0.04 268 / 0.05);
+  --shadow-sm: 0 1px 2px oklch(0.3 0.04 268 / 0.05), 0 2px 6px oklch(0.3 0.04 268 / 0.05);
+  --shadow:    0 2px 4px oklch(0.3 0.04 268 / 0.04), 0 8px 24px oklch(0.3 0.04 268 / 0.08);
+  --shadow-lg: 0 4px 8px oklch(0.3 0.04 268 / 0.05), 0 24px 60px -12px oklch(0.28 0.06 268 / 0.20);
+  --shadow-accent: 0 8px 30px -8px oklch(0.555 0.205 272 / 0.45);
+
+  /* ---- Spacing scale ---- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+  --sp-9: 96px; --sp-10: 128px;
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 220ms;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--accent-soft-2); color: var(--accent-press); }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+/* ---- Shared atoms ---- */
+.mono { font-family: var(--font-mono); }
+
+.btn {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  padding: 11px 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease),
+              transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), color var(--dur) var(--ease);
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--text-on-accent);
+  box-shadow: var(--shadow-accent);
+}
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-primary:active { background: var(--accent-press); }
+
+.btn-ghost {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+  box-shadow: var(--shadow-xs);
+}
+.btn-ghost:hover { background: var(--surface-2); border-color: var(--border-strong); }
+
+.btn-quiet {
+  background: transparent;
+  color: var(--text-muted);
+}
+.btn-quiet:hover { background: var(--surface-2); color: var(--text); }
+
+/* ---- Pulsar mark (concentric pulse rings) — pure circles only ---- */
+.pulsar-mark { display: inline-block; flex: none; }

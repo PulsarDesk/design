@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulsar — Design Direction</title>
+<link rel="stylesheet" href="assets/tokens.css">
+<style>
+  body { background: var(--bg); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---- Top cover ---- */
+  .cover {
+    position: relative;
+    padding: 120px 0 96px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .cover::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(900px 380px at 78% -10%, var(--accent-soft) 0%, transparent 60%),
+      radial-gradient(700px 320px at 10% 120%, var(--cyan-soft) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .cover .wrap { position: relative; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 28px;
+  }
+  .lockup { display: flex; align-items: center; gap: 18px; margin-bottom: 30px; }
+  .wordmark {
+    font-family: var(--font-display); font-weight: 600; font-size: 46px;
+    letter-spacing: -0.03em; color: var(--text);
+  }
+  .cover h1 {
+    font-size: clamp(38px, 6vw, 68px); max-width: 16ch; margin-bottom: 22px;
+  }
+  .cover p.lede {
+    font-size: 19px; line-height: 1.55; color: var(--text-muted); max-width: 56ch;
+  }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+  .chip {
+    font-family: var(--font-mono); font-size: 12.5px; color: var(--text-muted);
+    border: 1px solid var(--border); background: var(--surface);
+    padding: 7px 13px; border-radius: var(--r-pill);
+  }
+
+  /* ---- Sections ---- */
+  section.block { padding: 76px 0; border-bottom: 1px solid var(--border); }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px; }
+  .sec-num {
+    font-family: var(--font-mono); font-size: 13px; color: var(--accent);
+    border: 1px solid var(--accent-soft-2); border-radius: var(--r-pill);
+    padding: 4px 11px;
+  }
+  .sec-head h2 { font-size: 30px; }
+  .sec-head p { color: var(--text-muted); margin: 6px 0 0; font-size: 15.5px; max-width: 50ch; }
+
+  /* ---- Logo construction ---- */
+  .logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .logo-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg);
+    padding: 36px; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 18px; box-shadow: var(--shadow-sm); min-height: 200px;
+  }
+  .logo-card.dark { background: oklch(0.22 0.02 268); border-color: oklch(0.3 0.02 268); }
+  .logo-card .cap {
+    font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-faint);
+  }
+  .logo-card.dark .cap { color: oklch(0.65 0.02 268); }
+
+  /* ---- Color ---- */
+  .swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+  .swatch { border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
+  .swatch .chipc { height: 78px; }
+  .swatch .lab { padding: 11px 12px; }
+  .swatch .lab b { display: block; font-size: 13px; font-weight: 600; }
+  .swatch .lab code { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); }
+
+  /* ---- Type specimen ---- */
+  .type-row { padding: 22px 0; border-top: 1px solid var(--border); display: grid; grid-template-columns: 150px 1fr; gap: 24px; align-items: baseline; }
+  .type-row:first-child { border-top: none; }
+  .type-row .tlabel { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); letter-spacing: 0.06em; }
+  .specimen-display { font-family: var(--font-display); font-weight: 600; font-size: 40px; letter-spacing: -0.03em; }
+  .specimen-body { font-family: var(--font-sans); font-size: 18px; line-height: 1.5; color: var(--text-muted); max-width: 54ch; }
+  .specimen-mono { font-family: var(--font-mono); font-size: 22px; letter-spacing: 0.02em; color: var(--text); }
+
+  /* ---- Components preview ---- */
+  .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 26px; box-shadow: var(--shadow-sm); }
+  .panel h4 { font-size: 13px; font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 18px; }
+  .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .id-field {
+    display: flex; align-items: center; gap: 12px; background: var(--surface-2);
+    border: 1px solid var(--border); border-radius: var(--r); padding: 14px 16px;
+  }
+  .id-field .num { font-family: var(--font-mono); font-size: 26px; font-weight: 500; letter-spacing: 0.08em; color: var(--text); }
+  .badge { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; padding: 5px 11px; border-radius: var(--r-pill); }
+  .badge .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .badge.online { background: var(--ok-soft); color: var(--ok); }
+  .badge.online .dot { background: var(--ok); }
+  .badge.stream { background: var(--cyan-soft); color: var(--cyan); }
+  .badge.stream .dot { background: var(--cyan); }
+
+  /* ---- Plan ---- */
+  .plan { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .plan-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; box-shadow: var(--shadow-sm); }
+  .plan-card .k { font-family: var(--font-mono); font-size: 12px; color: var(--accent); margin-bottom: 10px; }
+  .plan-card h3 { font-size: 19px; margin-bottom: 10px; }
+  .plan-card ul { margin: 0; padding-left: 18px; color: var(--text-muted); font-size: 14.5px; line-height: 1.7; }
+  .note { background: var(--accent-soft); border: 1px solid var(--accent-soft-2); border-radius: var(--r); padding: 16px 18px; font-size: 14.5px; color: var(--accent-press); margin-top: 26px; }
+
+  @media (max-width: 760px) {
+    .logo-grid, .swatches, .comp-grid, .plan { grid-template-columns: 1fr 1fr; }
+    .type-row { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="wrap">
+    <div class="eyebrow">Design Direction · v1</div>
+    <div class="lockup">
+      <svg class="pulsar-mark" width="52" height="52" viewBox="0 0 52 52" fill="none" aria-label="Pulsar">
+        <circle cx="26" cy="26" r="24" stroke="var(--accent)" stroke-width="1.5" opacity="0.18"/>
+        <circle cx="26" cy="26" r="16" stroke="var(--accent)" stroke-width="1.75" opacity="0.42"/>
+        <circle cx="26" cy="26" r="8.5" stroke="var(--accent)" stroke-width="2"/>
+        <circle cx="26" cy="26" r="3.5" fill="var(--accent)"/>
+      </svg>
+      <span class="wordmark">Pulsar</span>
+    </div>
+    <h1>Uzaktaki makinen, yanındaymış gibi.</h1>
+    <p class="lede">Pulsar; Parsec, TeamViewer, AnyDesk ve RustDesk’e açık kaynaklı bir alternatif. Tek bir uygulamada hem düşük gecikmeli uzaktan oyun, hem de güvenli uzaktan masaüstü erişimi ve yönetimi. macOS, Windows ve Linux’ta çalışır — tamamen ücretsiz ve self-host edilebilir.</p>
+    <div class="meta-row">
+      <span class="chip">Açık kaynak · GPLv3</span>
+      <span class="chip">macOS · Windows · Linux</span>
+      <span class="chip">Oyun streaming + Remote desktop</span>
+      <span class="chip">Açık tema · Linear-adjacent</span>
+    </div>
+  </div>
+</div>
+
+<!-- 01 BRAND -->
+<section class="block"><div class="wrap">
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <div><h2>Marka fikri</h2>
+    <p>Bir <em>pulsar</em>, düzenli ve hassas sinyal atımları yayan dönen bir nötron yıldızıdır — düşük gecikmeli streaming’in tam metaforu. İşaret, merkezden dışa doğru genişleyen eşmerkezli “atım halkaları”ndan oluşur. Yalnızca daireler; sade, ölçeklenebilir, her boyutta okunur.</p></div>
+  </div>
+  <div class="logo-grid">
+    <div class="logo-card">
+      <svg class="pulsar-mark" width="76" height="76" viewBox="0 0 52 52" fill="none">
+        <circle cx="26" cy="26" r="24" stroke="var(--accent)" stroke-width="1.5" opacity="0.18"/>
+        <circle cx="26" cy="26" r="16" stroke="var(--accent)" stroke-width="1.75" opacity="0.42"/>
+        <circle cx="26" cy="26" r="8.5" stroke="var(--accent)" stroke-width="2"/>
+        <circle cx="26" cy="26" r="3.5" fill="var(--accent)"/>
+      </svg>
+      <span class="cap">Mark</span>
+    </div>
+    <div class="logo-card">
+      <span class="wordmark" style="font-size:34px">Pulsar</span>
+      <span class="cap">Wordmark · Space Grotesk</span>
+    </div>
+    <div class="logo-card dark">
+      <div style="display:flex;align-items:center;gap:13px">
+        <svg class="pulsar-mark" width="40" height="40" viewBox="0 0 52 52" fill="none">
+          <circle cx="26" cy="26" r="24" stroke="#fff" stroke-width="1.5" opacity="0.22"/>
+          <circle cx="26" cy="26" r="16" stroke="#fff" stroke-width="1.75" opacity="0.5"/>
+          <circle cx="26" cy="26" r="8.5" stroke="#fff" stroke-width="2"/>
+          <circle cx="26" cy="26" r="3.5" fill="#fff"/>
+        </svg>
+        <span style="font-family:var(--font-display);font-weight:600;font-size:26px;color:#fff;letter-spacing:-0.03em">Pulsar</span>
+      </div>
+      <span class="cap">Koyu zemin lockup</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- 02 COLOR -->
+<section class="block"><div class="wrap">
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <div><h2>Renk</h2>
+    <p>Açık tema baskın, serin tonlu near-white yüzeyler. Tek canlı vurgu: elektrik indigo. İkincil vurgu camgöbeği (gaming/stream bağlamı) aynı parlaklık ve doygunlukta, sadece ton farklı.</p></div>
+  </div>
+  <div class="swatches">
+    <div class="swatch"><div class="chipc" style="background:var(--bg)"></div><div class="lab"><b>BG</b><code>0.992 0.003 255</code></div></div>
+    <div class="swatch"><div class="chipc" style="background:var(--surface-3)"></div><div class="lab"><b>Surface 3</b><code>0.962 .007 260</code></div></div>
+    <div class="swatch"><div class="chipc" style="background:var(--text)"></div><div class="lab"><b>Text</b><code>0.235 .018 268</code></div></div>
+    <div class="swatch"><div class="chipc" style="background:var(--accent)"></div><div class="lab"><b>Accent</b><code>0.555 .205 272</code></div></div>
+    <div class="swatch"><div class="chipc" style="background:var(--cyan)"></div><div class="lab"><b>Cyan</b><code>0.62 .15 215</code></div></div>
+    <div class="swatch"><div class="chipc" style="background:var(--ok)"></div><div class="lab"><b>Online</b><code>0.63 .15 158</code></div></div>
+  </div>
+</div></section>
+
+<!-- 03 TYPE -->
+<section class="block"><div class="wrap">
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <div><h2>Tipografi</h2>
+    <p>Space Grotesk başlık/wordmark için (teknik, ayırt edici), Hanken Grotesk gövde/UI için (temiz, okunur), JetBrains Mono ID’ler ve teknik etiketler için.</p></div>
+  </div>
+  <div class="type-row"><div class="tlabel">DISPLAY<br>Space Grotesk</div><div class="specimen-display">Bağlan, oyna, yönet.</div></div>
+  <div class="type-row"><div class="tlabel">BODY<br>Hanken Grotesk</div><div class="specimen-body">Uçtan uca şifreli, doğrudan eşler arası bağlantı. Hesap zorunlu değil; kendi relay sunucunu çalıştırabilirsin.</div></div>
+  <div class="type-row"><div class="tlabel">MONO<br>JetBrains Mono</div><div class="specimen-mono">ID 482 913 056 · 60 fps · 8 ms</div></div>
+</div></section>
+
+<!-- 04 COMPONENTS -->
+<section class="block"><div class="wrap">
+  <div class="sec-head">
+    <span class="sec-num">04</span>
+    <div><h2>Bileşen tomurcukları</h2>
+    <p>Hem website hem desktop app için ortak dil: butonlar, ID alanı, durum rozetleri.</p></div>
+  </div>
+  <div class="comp-grid">
+    <div class="panel">
+      <h4>Butonlar</h4>
+      <div class="row">
+        <button class="btn btn-primary">Bağlan</button>
+        <button class="btn btn-ghost">İndir</button>
+        <button class="btn btn-quiet">Vazgeç</button>
+      </div>
+    </div>
+    <div class="panel">
+      <h4>Durum</h4>
+      <div class="row">
+        <span class="badge online"><span class="dot"></span>Çevrimiçi</span>
+        <span class="badge stream"><span class="dot"></span>Streaming · 60 fps</span>
+      </div>
+    </div>
+    <div class="panel" style="grid-column:1 / -1">
+      <h4>Bu cihazın kimliği</h4>
+      <div class="id-field">
+        <span class="num">482 913 056</span>
+        <span class="badge online" style="margin-left:auto"><span class="dot"></span>Hazır</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 05 PLAN -->
+<section class="block" style="border-bottom:none"><div class="wrap">
+  <div class="sec-head">
+    <span class="sec-num">05</span>
+    <div><h2>Teslim edeceklerim</h2>
+    <p>İki ayrı ürün, tek tasarım dili. Aşağıdakileri sırayla inşa edeceğim.</p></div>
+  </div>
+  <div class="plan">
+    <div class="plan-card">
+      <div class="k">// website</div>
+      <h3>Landing + İndirme</h3>
+      <ul>
+        <li>Hero + canlı atım animasyonu</li>
+        <li>İki kullanım: Gaming & Remote desktop</li>
+        <li>Özellikler, güvenlik, self-host</li>
+        <li>OS algılayan ayrı indirme sayfası</li>
+      </ul>
+    </div>
+    <div class="plan-card">
+      <div class="k">// desktop app</div>
+      <h3>Etkileşimli Prototip</h3>
+      <ul>
+        <li>Frameless özel pencere + sidebar</li>
+        <li>Ana ekran: kendi ID/şifre + bağlan</li>
+        <li>Cihazlar / adres defteri</li>
+        <li>Bağlanıyor → aktif oturum toolbar</li>
+        <li>Gaming/host modu, Ayarlar</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Sıradaki adım: bu yönü onaylarsan website ve etkileşimli desktop app’i inşa edip göstereceğim. Accent rengi, font ve tema varyasyonlarını uygulama içinde <b>Tweaks</b> paneliyle canlı değiştirebileceksin.</div>
+</div></section>
+
+</body>
+</html>
