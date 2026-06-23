@@ -1,0 +1,34 @@
+{
+  "name": "@pulsar/ds",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pulsar design system — React components ported from the design/ handoff prototype, styled with the canonical tokens.",
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./src/styles.css"
+  },
+  "files": ["dist", "src/styles.css"],
+  "scripts": {
+    "build": "node build.mjs && tsc -p tsconfig.build.json"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "esbuild": "^0.24.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.6.3"
+  }
+}

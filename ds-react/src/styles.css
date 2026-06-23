@@ -1,0 +1,210 @@
+/* ===========================================================================
+   PULSAR — Design System stylesheet
+   Tokens + shared atoms, ported verbatim from design/project/assets/tokens.css
+   and the prototype chrome in design/project/Pulsar App.html.
+   Light-first, minimal, Linear/Vercel-adjacent. Electric indigo accent.
+   The canonical token source of truth for the whole Pulsar project.
+   =========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ---- Surfaces & neutrals (cool near-whites) ---- */
+  --bg:            oklch(0.992 0.003 255);
+  --bg-tint:       oklch(0.975 0.006 262);
+  --surface:       oklch(1 0 0);
+  --surface-2:     oklch(0.978 0.005 258);
+  --surface-3:     oklch(0.962 0.007 260);
+  --border:        oklch(0.918 0.006 262);
+  --border-strong: oklch(0.862 0.009 262);
+
+  /* ---- Text ---- */
+  --text:        oklch(0.235 0.018 268);
+  --text-muted:  oklch(0.505 0.014 266);
+  --text-faint:  oklch(0.635 0.011 264);
+  --text-on-accent: oklch(0.99 0.01 272);
+
+  /* ---- Accents (shared L≈0.55, C≈0.18–0.20, hue varies) ---- */
+  --accent:        oklch(0.555 0.205 272);   /* electric indigo */
+  --accent-hover:  oklch(0.505 0.215 272);
+  --accent-press:  oklch(0.455 0.205 272);
+  --accent-soft:   oklch(0.955 0.035 272);
+  --accent-soft-2: oklch(0.915 0.06 272);
+  --accent-ring:   oklch(0.555 0.205 272 / 0.35);
+  --cyan:          oklch(0.62 0.15 215);      /* gaming / stream */
+  --cyan-soft:     oklch(0.955 0.035 215);
+
+  /* ---- Status ---- */
+  --ok:        oklch(0.63 0.15 158);
+  --ok-soft:   oklch(0.95 0.04 158);
+  --warn:      oklch(0.72 0.15 75);
+  --warn-soft: oklch(0.96 0.05 75);
+  --danger:    oklch(0.575 0.205 25);
+  --danger-soft: oklch(0.955 0.035 25);
+
+  /* ---- Type ---- */
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ---- Radii ---- */
+  --r-xs: 6px;
+  --r-sm: 9px;
+  --r:    13px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+  --r-pill: 999px;
+
+  /* ---- Shadows (soft, cool-toned) ---- */
+  --shadow-xs: 0 1px 2px oklch(0.3 0.04 268 / 0.05);
+  --shadow-sm: 0 1px 2px oklch(0.3 0.04 268 / 0.05), 0 2px 6px oklch(0.3 0.04 268 / 0.05);
+  --shadow:    0 2px 4px oklch(0.3 0.04 268 / 0.04), 0 8px 24px oklch(0.3 0.04 268 / 0.08);
+  --shadow-lg: 0 4px 8px oklch(0.3 0.04 268 / 0.05), 0 24px 60px -12px oklch(0.28 0.06 268 / 0.20);
+  --shadow-accent: 0 8px 30px -8px oklch(0.555 0.205 272 / 0.45);
+
+  /* ---- Spacing scale ---- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+  --sp-9: 96px; --sp-10: 128px;
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 220ms;
+}
+
+/* ---- dark theme tokens (set data-theme="dark" on :root) ---- */
+:root[data-theme="dark"] {
+  --bg: oklch(0.17 0.012 265);
+  --bg-tint: oklch(0.2 0.015 265);
+  --surface: oklch(0.215 0.013 265);
+  --surface-2: oklch(0.245 0.013 265);
+  --surface-3: oklch(0.29 0.015 265);
+  --border: oklch(0.32 0.014 265);
+  --border-strong: oklch(0.42 0.016 265);
+  --text: oklch(0.95 0.008 265);
+  --text-muted: oklch(0.72 0.012 265);
+  --text-faint: oklch(0.56 0.012 265);
+  --shadow-xs: 0 1px 2px oklch(0 0 0 / 0.3);
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.3), 0 2px 6px oklch(0 0 0 / 0.3);
+  --shadow: 0 2px 4px oklch(0 0 0 / 0.3), 0 8px 24px oklch(0 0 0 / 0.4);
+  --shadow-lg: 0 4px 8px oklch(0 0 0 / 0.3), 0 24px 60px -12px oklch(0 0 0 / 0.6);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--accent-soft-2); color: var(--accent-press); }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+/* ---- Shared atoms ---- */
+.mono { font-family: var(--font-mono); }
+
+.btn {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  padding: 11px 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease),
+              transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), color var(--dur) var(--ease);
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn:active { transform: translateY(1px); }
+.btn:disabled { cursor: default; }
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--text-on-accent);
+  box-shadow: var(--shadow-accent);
+}
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-primary:active { background: var(--accent-press); }
+
+.btn-ghost {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+  box-shadow: var(--shadow-xs);
+}
+.btn-ghost:hover { background: var(--surface-2); border-color: var(--border-strong); }
+
+.btn-quiet {
+  background: transparent;
+  color: var(--text-muted);
+}
+.btn-quiet:hover { background: var(--surface-2); color: var(--text); }
+
+/* ---- Pulsar mark (concentric pulse rings) — pure circles only ---- */
+.pulsar-mark { display: inline-block; flex: none; }
+
+/* ---- app window chrome ---- */
+.desktop { width: 100%; height: 100%; display: grid; place-items: center; }
+.window {
+  width: min(1200px, 96vw); height: min(780px, 94vh);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  box-shadow: var(--shadow-lg); overflow: hidden; display: flex; flex-direction: column;
+}
+.content { flex: 1; position: relative; overflow: auto; padding: 32px; background: var(--bg); }
+:root[data-density="compact"] .content { padding: 22px; }
+:root[data-density="comfy"] .content { padding: 42px; }
+
+/* ---- shared form atoms ---- */
+.field { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border-strong);
+  border-radius: var(--r); padding: 11px 13px; background: var(--surface); transition: border-color var(--dur), box-shadow var(--dur); }
+.field:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-ring); }
+.field input::placeholder { color: var(--text-faint); }
+
+.icon-btn { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--border);
+  background: var(--surface); border-radius: var(--r-sm); cursor: pointer; color: var(--text-muted);
+  transition: all var(--dur) var(--ease); }
+.icon-btn:hover { border-color: var(--border-strong); color: var(--text); background: var(--surface-2); }
+
+.recent-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border: 1px solid transparent;
+  border-radius: var(--r-sm); cursor: pointer; background: var(--surface-2); transition: all var(--dur) var(--ease); width: 100%; }
+.recent-row:hover { background: var(--surface); border-color: var(--border); box-shadow: var(--shadow-xs); }
+
+.device-tile { display: flex; align-items: center; gap: 14px; padding: 16px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-xs);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur); }
+.device-tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); border-color: var(--border-strong); }
+
+.cfg-lab { font-size: 12.5px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+
+/* range slider */
+.prange { -webkit-appearance: none; appearance: none; width: 100%; height: 5px; border-radius: 3px;
+  background: var(--surface-3); margin-top: 10px; cursor: pointer; }
+.prange::-webkit-slider-thumb { -webkit-appearance: none; width: 17px; height: 17px; border-radius: 50%;
+  background: var(--accent); border: 2.5px solid var(--surface); box-shadow: var(--shadow-xs); cursor: pointer; }
+.prange::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 2.5px solid var(--surface); cursor: pointer; }
+
+/* connecting animations */
+.cring { position: absolute; width: 64px; height: 64px; border: 1.5px solid var(--accent); border-radius: 50%;
+  opacity: 0; animation: cringe 2.7s ease-out infinite; }
+@keyframes cringe { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(3); opacity: 0; } }
+.spin { animation: spin 0.8s linear infinite; display: block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes slideIn { from { transform: translateX(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
