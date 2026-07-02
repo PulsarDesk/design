@@ -1,0 +1,32 @@
+name: Release
+
+# Tag + GitHub Release from Conventional Commits (no commit-back). This repo is
+# reference/handoff, so there are no build artifacts to attach.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: semantic-release (tag + GitHub release)
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          extra_plugins: |
+            conventional-changelog-conventionalcommits@^9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

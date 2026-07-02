@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Build the ds-react package (esbuild bundle + tsc type declarations) so the
+  # design system stays compilable. The rest of the repo is static reference
+  # (tokens, prototypes, brand handoff).
+  ds-react:
+    name: ds-react build
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ds-react
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Install deps
+        run: bun install --frozen-lockfile
+      - name: Build
+        run: bun run build
