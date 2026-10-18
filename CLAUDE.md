@@ -5,7 +5,8 @@ for the product and brand rules.
 
 - `project/assets/tokens.css` — **THE canonical design tokens** (Claude Design
   handoff). Every other repo (website, desktop UI) ports from here; sync back
-  any change.
+  any change. It defines the **light theme only** — the desktop app's dark theme and
+  gaming (cyan) overrides live solely in `pulsar-desktop/src/app.css`.
 - `project/*.html` + `project/app/*.jsx` — prototypes from the handoff bundle
   (desktop app screens, website pages). Reference, not production code.
 - `ds-react/` — hand-built React component package of the DS (own build via
