@@ -1,25 +1,64 @@
-# CODING AGENTS: READ THIS FIRST
+<p align="center">
+  <img width="120" height="120" src="https://raw.githubusercontent.com/PulsarDesk/.github/main/profile/logo.svg" alt="Pulsar logo">
+</p>
 
-This is a **handoff bundle** from Claude Design (claude.ai/design).
+<h1 align="center">Pulsar Design</h1>
 
-A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported this bundle so a coding agent can implement the designs for real.
+<p align="center">
+  Colors, fonts, components and screen designs for every Pulsar app and the website. 🎨
+</p>
 
-## What you should do — IMPORTANT
+<p align="center">
+  <img src="https://img.shields.io/maintenance/yes/2026?style=for-the-badge" alt="Maintained">
+  <a href="https://github.com/PulsarDesk/design/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/PulsarDesk/design/ci.yml?branch=main&style=for-the-badge&label=CI" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/PulsarDesk/design?style=for-the-badge" alt="License"></a>
+</p>
 
-**Read the chat transcripts first.** There are 1 chat transcript(s) in `pulsar/chats/`. The transcripts show the full back-and-forth between the user and the design assistant — they tell you **what the user actually wants** and **where they landed** after iterating. Don't skip them. The final HTML files are the output, but the chat is where the intent lives.
+---
 
-**Read `pulsar/project/Pulsar Website.html` in full.** The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+## 🚀 Project Status
+The design source for Pulsar. The apps and the website copy their colors and spacing from here, so a change starts
+in this repository.
 
-**If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
+- [`project/assets/tokens.css`](project/assets/tokens.css) - colors, fonts, spacing (the one source of truth)
+- [`project/`](project/) - screen designs as HTML prototypes (open them in a browser)
+- [`ds-react/`](ds-react/) - the same components as a React package
 
-## About the design files
+Look: light theme first, electric indigo accent, cyan for game mode. Fonts: Space Grotesk, Hanken Grotesk,
+JetBrains Mono. Logo: concentric pulse rings.
 
-The design medium is **HTML/CSS/JS** — these are prototypes, not production code. Your job is to **recreate them pixel-perfectly** in whatever technology makes sense for the target codebase (React, Vue, native, whatever fits). Match the visual output; don't copy the prototype's internal structure unless it happens to fit.
+---
 
-**Don't render these files in a browser or take screenshots unless the user asks you to.** Everything you need — dimensions, colors, layout rules — is spelled out in the source. Read the HTML and CSS directly; a screenshot won't tell you anything they don't.
+## 📦 Other Pulsar Repositories
+- [**pulsar-desktop**](https://github.com/PulsarDesk/pulsar-desktop) - Pulsar for Windows, macOS and Linux
+- [**pulsar-mobile**](https://github.com/PulsarDesk/pulsar-mobile) - Pulsar for Android
+- [**web**](https://github.com/PulsarDesk/web) - The [pulsardesk.com](https://pulsardesk.com) website
 
-## Bundle contents
+---
 
-- `pulsar/README.md` — this file
-- `pulsar/chats/` — conversation transcripts (read these!)
-- `pulsar/project/` — the `Pulsar` project files (HTML prototypes, assets, components)
+## 🐞 Reporting a bug
+Something looks wrong in an app? Report it in the app's repository
+([desktop](https://github.com/PulsarDesk/pulsar-desktop/issues/new/choose) or
+[mobile](https://github.com/PulsarDesk/pulsar-mobile/issues/new/choose)) with a screenshot. Open an issue here for
+problems in the design files themselves.
+
+---
+
+## 🤝 Contributing
+Everyone can open [issues](https://github.com/PulsarDesk/design/issues) and pull requests. Irrelevant or abusive
+issues may be closed or removed. Commits follow [Conventional Commits](https://www.conventionalcommits.org).
+
+### Development Guide
+```bash
+git clone https://github.com/PulsarDesk/design.git
+cd design/ds-react
+bun install
+bun run build
+```
+
+The designs came from a Claude Design handoff; notes for coding agents are in [HANDOFF.md](HANDOFF.md).
+
+---
+
+## 📄 License
+Pulsar is licensed under **GNU GPLv3 or later** (GPL-3.0-or-later). See the [LICENSE](LICENSE) file for details.
