@@ -1,0 +1,208 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=block" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b0e1a; --ink2:#11152a; --indigo:#5b57e0; --indigo-hi:#7d7aff; --cyan:#13b3d4; --cyan-hi:#5fe0f5;
+  --text:#f3f4ff; --muted:#a3a8c8; --faint:#6b7096; --line:rgba(255,255,255,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:transparent;font-family:'Hanken Grotesk',sans-serif;color:var(--text)}
+section{display:none;position:relative;overflow:hidden;border-radius:28px;
+  background:
+    radial-gradient(900px 520px at 88% 8%, rgba(91,87,224,.55), transparent 60%),
+    radial-gradient(700px 480px at 8% 110%, rgba(19,179,212,.35), transparent 60%),
+    linear-gradient(160deg,#0d1124 0%,#090b16 100%);
+}
+body[data-show] section{display:none}
+section.on{display:block}
+/* faint grid + rings */
+section::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:48px 48px;mask-image:radial-gradient(ellipse 70% 80% at 30% 40%,#000 0%,transparent 75%);opacity:.55}
+.rings{position:absolute;border-radius:50%;pointer-events:none}
+.rings i{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(125,122,255,.28)}
+.rings i:nth-child(2){inset:14%;border-color:rgba(125,122,255,.22)}
+.rings i:nth-child(3){inset:28%;border-color:rgba(95,224,245,.22)}
+.rings i:nth-child(4){inset:42%;border-color:rgba(95,224,245,.18)}
+.brand{display:flex;align-items:center;gap:14px;font-family:'Space Grotesk';font-weight:600;font-size:26px;letter-spacing:-.01em}
+.brand svg{width:44px;height:44px}
+.eyebrow{font-family:'JetBrains Mono';font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan-hi)}
+h1{font-family:'Space Grotesk';font-weight:700;letter-spacing:-.035em;line-height:.98}
+h1 .grad{background:linear-gradient(95deg,#a9a6ff 0%,#7d7aff 35%,#5fe0f5 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);font-size:22px;line-height:1.45}
+.pills{display:flex;flex-wrap:wrap;gap:10px}
+.pill{font-family:'JetBrains Mono';font-weight:500;font-size:14px;padding:8px 14px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#dfe2ff}
+.pill.c{border-color:rgba(95,224,245,.35);color:var(--cyan-hi);background:rgba(19,179,212,.10)}
+.pill.i{border-color:rgba(125,122,255,.45);color:#c9c7ff;background:rgba(91,87,224,.16)}
+.win{position:absolute;border-radius:16px;overflow:hidden;background:#0f1220;
+  box-shadow:0 40px 90px -20px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.10),0 0 80px -10px rgba(91,87,224,.45)}
+.win .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#161a2c;border-bottom:1px solid rgba(255,255,255,.06)}
+.win .bar b{width:11px;height:11px;border-radius:50%;background:#3a3f5c}
+.win .bar b:nth-child(1){background:#ff5f57}.win .bar b:nth-child(2){background:#febc2e}.win .bar b:nth-child(3){background:#28c840}
+.win img{display:block;width:100%}
+.win.light .bar{background:#eef0f7;border-bottom-color:#dde0ea}
+.phone{position:absolute;border-radius:44px;padding:11px;background:#05060c;
+  box-shadow:0 40px 90px -20px rgba(0,0,0,.8),0 0 0 1.5px rgba(255,255,255,.14),0 0 70px -10px rgba(19,179,212,.45)}
+.phone img{display:block;width:100%;border-radius:34px}
+.phone::after{content:"";position:absolute;top:22px;left:50%;width:80px;height:22px;margin-left:-40px;border-radius:12px;background:#05060c}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="mark" viewBox="0 0 52 52"><g fill="none">
+    <circle cx="26" cy="26" r="24" stroke="#7d7aff" stroke-width="1.5" opacity=".45"/>
+    <circle cx="26" cy="26" r="16" stroke="#7d7aff" stroke-width="1.75" opacity=".75"/>
+    <circle cx="26" cy="26" r="8.5" stroke="#a9a6ff" stroke-width="2"/>
+    <circle cx="26" cy="26" r="3.5" fill="#5fe0f5"/></g></symbol>
+</defs></svg>
+
+<!-- ========== ORG PROFILE HERO ========== -->
+<section id="hero-org" style="width:1600px;height:800px">
+  <div class="rings" style="width:1300px;height:1300px;right:-380px;top:-300px"><i></i><i></i><i></i><i></i></div>
+  <div style="position:absolute;left:88px;top:92px;width:700px;display:flex;flex-direction:column;gap:30px">
+    <div class="brand"><svg><use href="#mark"/></svg>Pulsar</div>
+    <h1 style="font-size:96px">Your computer.<br><span class="grad">Anywhere.</span></h1>
+    <p class="sub" style="max-width:600px">Free, open-source remote desktop and game streaming for Windows, macOS, Linux and Android. No account. No subscription. No tracking.</p>
+    <div class="pills"><span class="pill i">Remote desktop</span><span class="pill c">Game streaming</span><span class="pill">End-to-end encrypted</span><span class="pill">GPLv3</span></div>
+  </div>
+  <div class="win" style="width:880px;left:820px;top:150px"><div class="bar"><b></b><b></b><b></b></div><img src="img/connect-dark.png"></div>
+  <div class="phone" style="width:250px;left:760px;top:380px"><img src="img/m-game-mode.png"></div>
+</section>
+
+<!-- ========== DESKTOP HERO ========== -->
+<section id="hero-desktop" style="width:1600px;height:800px">
+  <div class="rings" style="width:1200px;height:1200px;left:-420px;top:-200px"><i></i><i></i><i></i><i></i></div>
+  <div style="position:absolute;left:88px;top:96px;width:640px;display:flex;flex-direction:column;gap:28px">
+    <div class="brand"><svg><use href="#mark"/></svg>Pulsar Desktop</div>
+    <h1 style="font-size:88px">Reach any PC.<br><span class="grad">Play any game.</span></h1>
+    <p class="sub">Help a friend, work from the couch, or play your gaming PC from another room, all in one free app.</p>
+    <div class="pills"><span class="pill">Windows</span><span class="pill">macOS</span><span class="pill">Linux</span><span class="pill c">4K · 240 fps</span><span class="pill i">HDR</span></div>
+  </div>
+  <div class="win light" style="width:820px;left:880px;top:70px;opacity:.9"><div class="bar"><b></b><b></b><b></b></div><img src="img/gaming-light.png"></div>
+  <div class="win" style="width:860px;left:740px;top:300px"><div class="bar"><b></b><b></b><b></b></div><img src="img/connect-dark.png"></div>
+</section>
+
+<!-- ========== MOBILE HERO ========== -->
+<section id="hero-mobile" style="width:1600px;height:800px">
+  <div class="rings" style="width:1300px;height:1300px;right:-300px;top:-250px"><i></i><i></i><i></i><i></i></div>
+  <div style="position:absolute;left:88px;top:110px;width:640px;display:flex;flex-direction:column;gap:28px">
+    <div class="brand"><svg><use href="#mark"/></svg>Pulsar Mobile</div>
+    <h1 style="font-size:88px">Your PC,<br><span class="grad">in your pocket.</span></h1>
+    <p class="sub">Control your computer with touch, stream your games with a real controller, or share your phone's screen. Free, on Android.</p>
+    <div class="pills"><span class="pill">Android</span><span class="pill">Android TV</span><span class="pill c">Controllers</span><span class="pill i">Touch + mouse</span></div>
+  </div>
+  <div class="phone" style="width:290px;left:820px;top:150px;transform:rotate(-6deg)"><img src="img/m-connect.png"></div>
+  <div class="phone" style="width:310px;left:1060px;top:90px;z-index:2"><img src="img/m-game-mode.png"></div>
+  <div class="phone" style="width:290px;left:1310px;top:160px;transform:rotate(6deg)"><img src="img/m-my-device.png"></div>
+</section>
+
+<!-- ========== RELAY HERO ========== -->
+<section id="hero-relay" style="width:1600px;height:720px">
+  <div class="rings" style="width:900px;height:900px;left:1000px;top:-90px;margin-left:-450px"><i></i><i></i><i></i><i></i></div>
+  <div style="position:absolute;left:88px;top:110px;width:560px;display:flex;flex-direction:column;gap:28px">
+    <div class="brand"><svg><use href="#mark"/></svg>Pulsar Relay</div>
+    <h1 style="font-size:84px">Your server.<br><span class="grad">Your rules.</span></h1>
+    <p class="sub">Run the Pulsar server yourself with one Docker command. Your devices, your IDs, your network.</p>
+    <div class="pills"><span class="pill c">1 command</span><span class="pill">Docker</span><span class="pill">Linux · Windows · macOS</span></div>
+  </div>
+  <svg style="position:absolute;left:650px;top:80px" width="900" height="560" viewBox="0 0 900 560" fill="none">
+    <defs>
+      <linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#7d7aff"/><stop offset="1" stop-color="#5fe0f5"/></linearGradient>
+      <filter id="gl"><feGaussianBlur stdDeviation="8"/></filter>
+    </defs>
+    <!-- links -->
+    <path d="M170 400 C 300 400, 330 220, 450 210" stroke="url(#lg)" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+    <path d="M730 400 C 600 400, 570 220, 450 210" stroke="url(#lg)" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+    <path d="M200 440 C 380 500, 520 500, 700 440" stroke="#5fe0f5" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+    <text x="450" y="520" text-anchor="middle" font-family="JetBrains Mono" font-size="15" fill="#5fe0f5" letter-spacing="2">DIRECT FIRST</text>
+    <text x="450" y="300" text-anchor="middle" font-family="JetBrains Mono" font-size="15" fill="#a9a6ff" letter-spacing="2">RELAY WHEN NEEDED</text>
+    <!-- server -->
+    <circle cx="450" cy="190" r="90" fill="#5b57e0" opacity=".35" filter="url(#gl)"/>
+    <rect x="380" y="120" width="140" height="140" rx="30" fill="#151936" stroke="#7d7aff" stroke-width="2"/>
+    <rect x="410" y="152" width="80" height="18" rx="5" fill="#252a52"/><circle cx="476" cy="161" r="4" fill="#5fe0f5"/>
+    <rect x="410" y="181" width="80" height="18" rx="5" fill="#252a52"/><circle cx="476" cy="190" r="4" fill="#28c840"/>
+    <rect x="410" y="210" width="80" height="18" rx="5" fill="#252a52"/><circle cx="476" cy="219" r="4" fill="#7d7aff"/>
+    <!-- laptop -->
+    <rect x="70" y="330" width="200" height="130" rx="14" fill="#151936" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
+    <rect x="86" y="346" width="168" height="98" rx="6" fill="#0d1124"/>
+    <text x="170" y="402" text-anchor="middle" font-family="JetBrains Mono" font-weight="600" font-size="20" fill="#e6e7ff">482 913 056</text>
+    <rect x="40" y="460" width="260" height="14" rx="7" fill="#252a52"/>
+    <!-- desktop -->
+    <rect x="620" y="320" width="220" height="140" rx="14" fill="#151936" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
+    <rect x="636" y="336" width="188" height="108" rx="6" fill="#0d1124"/>
+    <text x="730" y="398" text-anchor="middle" font-family="JetBrains Mono" font-weight="600" font-size="20" fill="#e6e7ff">719 204 663</text>
+    <rect x="715" y="460" width="30" height="22" fill="#252a52"/><rect x="680" y="480" width="100" height="10" rx="5" fill="#252a52"/>
+    <!-- lock -->
+    <g transform="translate(428 412)"><rect x="0" y="16" width="44" height="34" rx="8" fill="#0f2b36" stroke="#5fe0f5" stroke-width="2"/>
+      <path d="M10 16 v-6 a12 12 0 0 1 24 0 v6" stroke="#5fe0f5" stroke-width="2.5" fill="none"/><circle cx="22" cy="33" r="4" fill="#5fe0f5"/></g>
+  </svg>
+</section>
+
+<!-- ========== 3 STEPS ========== -->
+<section id="steps" style="width:1600px;height:560px">
+  <div style="position:absolute;left:0;right:0;top:56px;text-align:center"><div class="eyebrow">How it works</div>
+    <h1 style="font-size:52px;margin-top:14px">Connected in <span class="grad">three steps</span></h1></div>
+  <div style="position:absolute;left:80px;right:80px;top:200px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+    <div class="card">
+      <div class="n">1</div><div class="ct">Install Pulsar</div><div class="cd">On both devices. No account, no sign-up.</div>
+      <div class="vis"><span class="pill">Windows</span><span class="pill">macOS</span><span class="pill">Linux</span><span class="pill">Android</span></div>
+    </div>
+    <div class="card">
+      <div class="n">2</div><div class="ct">Share the code</div><div class="cd">The other side tells you their ID and one-time password.</div>
+      <div class="vis mono"><span>482 913 056</span><span class="pw">7yf2-qk</span></div>
+    </div>
+    <div class="card">
+      <div class="n c">3</div><div class="ct">You're in</div><div class="cd">See their screen, control it, or play. Encrypted end to end.</div>
+      <div class="vis"><span class="ok">● Connected · 12 ms</span></div>
+    </div>
+  </div>
+  <style>
+    .card{position:relative;height:300px;border-radius:22px;padding:30px 30px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(6px)}
+    .card .n{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-family:'Space Grotesk';font-weight:700;font-size:22px;background:rgba(91,87,224,.25);color:#c9c7ff;border:1px solid rgba(125,122,255,.5)}
+    .card .n.c{background:rgba(19,179,212,.18);color:var(--cyan-hi);border-color:rgba(95,224,245,.5)}
+    .card .ct{font-family:'Space Grotesk';font-weight:600;font-size:30px;margin-top:22px;letter-spacing:-.02em}
+    .card .cd{color:var(--muted);font-size:19px;margin-top:8px;line-height:1.4}
+    .card .vis{position:absolute;left:30px;right:30px;bottom:28px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+    .card .vis.mono{font-family:'JetBrains Mono';font-weight:600;font-size:24px;gap:18px;color:#e6e7ff}
+    .card .vis .pw{color:var(--cyan-hi)}
+    .card .ok{font-family:'JetBrains Mono';font-size:16px;color:#5ee69a;padding:9px 16px;border-radius:999px;background:rgba(40,200,120,.12);border:1px solid rgba(94,230,154,.35)}
+  </style>
+</section>
+
+<!-- ========== STATS STRIP ========== -->
+<section id="stats" style="width:1600px;height:300px">
+  <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:0 40px">
+    <div class="st"><b class="grad">240</b><span>fps game streaming</span></div>
+    <div class="st"><b class="grad">4K HDR</b><span>H.264 · H.265 · AV1</span></div>
+    <div class="st"><b class="grad">100%</b><span>end-to-end encrypted</span></div>
+    <div class="st"><b class="grad">0</b><span>accounts, ads or tracking</span></div>
+  </div>
+  <style>
+    .st{display:flex;flex-direction:column;align-items:center;gap:10px;border-left:1px solid rgba(255,255,255,.09)}
+    .st:first-child{border-left:0}
+    .st b{font-family:'Space Grotesk';font-weight:700;font-size:72px;letter-spacing:-.04em;line-height:1;background:linear-gradient(95deg,#a9a6ff,#5fe0f5);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .st span{color:var(--muted);font-size:20px}
+  </style>
+</section>
+
+<!-- ========== SLIM BANNERS (libs) ========== -->
+<template id="slim-t">
+  <div class="rings" style="width:900px;height:900px;right:-260px;top:-300px"><i></i><i></i><i></i><i></i></div>
+  <div style="position:absolute;left:88px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;gap:20px;width:1300px">
+    <div class="brand"><svg><use href="#mark"/></svg><span class="bn"></span></div>
+    <h1 style="font-size:68px" class="hl"></h1>
+    <p class="sub sb" style="max-width:1000px"></p>
+  </div>
+</template>
+<section id="hero-core" class="slim" data-b="pulsar-core" data-h="The engine behind<br><span class='grad'>every Pulsar app.</span>" data-s="Connections, encryption and streaming, written once in Rust and shared by desktop and mobile." style="width:1600px;height:420px"></section>
+<section id="hero-proto" class="slim" data-b="pulsar-proto" data-h="The language Pulsar<br><span class='grad'>devices speak.</span>" data-s="One small, shared protocol so apps and relays always understand each other." style="width:1600px;height:420px"></section>
+<section id="hero-web" class="slim" data-b="pulsardesk.com" data-h="The front door<br><span class='grad'>to Pulsar.</span>" data-s="The website that picks the right download for your system, in four languages." style="width:1600px;height:420px"></section>
+<section id="hero-design" class="slim" data-b="Pulsar Design" data-h="How Pulsar<br><span class='grad'>looks and feels.</span>" data-s="Colors, fonts and screens: the single source every Pulsar app and page is built from." style="width:1600px;height:420px"></section>
+<script>
+document.querySelectorAll('section.slim').forEach(s=>{
+  s.appendChild(document.getElementById('slim-t').content.cloneNode(true));
+  s.querySelector('.bn').textContent=s.dataset.b; s.querySelector('.hl').innerHTML=s.dataset.h; s.querySelector('.sb').textContent=s.dataset.s;
+});
+</script>
+</body></html>
