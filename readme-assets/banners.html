@@ -186,6 +186,63 @@ h1 .grad{background:linear-gradient(95deg,#a9a6ff 0%,#7d7aff 35%,#5fe0f5 100%);-
   </style>
 </section>
 
+<!-- ========== FAMILY MAP (core / proto) ========== -->
+<section id="family" style="width:1600px;height:620px">
+  <div style="position:absolute;left:0;right:0;top:50px;text-align:center"><div class="eyebrow">Under the hood</div>
+    <h1 style="font-size:48px;margin-top:12px">How the pieces <span class="grad">fit together</span></h1></div>
+  <svg style="position:absolute;left:0;top:0" width="1600" height="620" viewBox="0 0 1600 620" fill="none">
+    <defs><linearGradient id="fl" x1="0" x2="1"><stop offset="0" stop-color="#7d7aff"/><stop offset="1" stop-color="#5fe0f5"/></linearGradient></defs>
+    <path d="M330 290 C 420 290, 440 370, 560 370" stroke="url(#fl)" stroke-width="2.5"/>
+    <path d="M330 470 C 420 470, 440 390, 560 390" stroke="url(#fl)" stroke-width="2.5"/>
+    <path d="M880 380 L 960 380" stroke="url(#fl)" stroke-width="2.5"/>
+    <path d="M1180 335 C 1180 280, 1250 250, 1300 250" stroke="#5fe0f5" stroke-width="2.5" stroke-dasharray="3 9" stroke-linecap="round"/>
+    <path d="M1180 425 C 1180 480, 1250 510, 1300 510" stroke="#5fe0f5" stroke-width="2.5" stroke-dasharray="3 9" stroke-linecap="round"/>
+  </svg>
+  <div class="node" style="left:90px;top:240px"><b>🖥️ Pulsar Desktop</b><span>Windows · macOS · Linux</span></div>
+  <div class="node" style="left:90px;top:420px"><b>📱 Pulsar Mobile</b><span>Android · Android TV</span></div>
+  <div class="node big" style="left:560px;top:290px"><b>🧩 pulsar-core</b><span>connect · encrypt · stream · controllers</span></div>
+  <div class="node mid" style="left:960px;top:335px"><b>📨 pulsar-proto</b><span>the shared protocol</span></div>
+  <div class="node c" style="left:1300px;top:200px;width:230px"><b>🛰️ Relay</b><span>IDs · introductions</span></div>
+  <div class="node c" style="left:1300px;top:460px;width:230px"><b>🌍 Other devices</b><span>direct, end to end</span></div>
+  <style>
+    .node{position:absolute;width:240px;padding:20px 22px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:6px}
+    .node b{font-family:'Space Grotesk';font-weight:600;font-size:22px;letter-spacing:-.01em}
+    .node span{color:var(--muted);font-size:15px}
+    .node.big{width:320px;padding:30px 28px;background:rgba(91,87,224,.18);border-color:rgba(125,122,255,.55);box-shadow:0 0 60px -10px rgba(91,87,224,.6)}
+    .node.big b{font-size:28px}
+    .node.mid{width:220px;padding:18px 20px;border-color:rgba(125,122,255,.4)}
+    .node.mid b{font-size:19px}
+    .node.c{border-color:rgba(95,224,245,.35);background:rgba(19,179,212,.08)}
+  </style>
+</section>
+
+<!-- ========== PALETTE (design) ========== -->
+<section id="palette" style="width:1600px;height:600px">
+  <div style="position:absolute;left:80px;top:60px"><div class="eyebrow">The Pulsar look</div>
+    <h1 style="font-size:48px;margin-top:12px">Colors &amp; <span class="grad">type</span></h1></div>
+  <div style="position:absolute;left:80px;right:80px;top:200px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:18px">
+    <div class="sw" style="background:oklch(0.555 0.205 272)"><b>Electric indigo</b><span>--accent · actions, focus</span></div>
+    <div class="sw" style="background:oklch(0.62 0.15 215)"><b>Cyan</b><span>--cyan · game mode</span></div>
+    <div class="sw" style="background:oklch(0.63 0.15 158)"><b>OK</b><span>--ok</span></div>
+    <div class="sw" style="background:oklch(0.72 0.15 75)"><b>Warn</b><span>--warn</span></div>
+    <div class="sw" style="background:oklch(0.575 0.205 25)"><b>Danger</b><span>--danger</span></div>
+  </div>
+  <div style="position:absolute;left:80px;right:80px;top:410px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+    <div class="ty"><b style="font-family:'Space Grotesk';font-weight:700">Aa</b><span><i>Space Grotesk</i>Headlines</span></div>
+    <div class="ty"><b style="font-family:'Hanken Grotesk';font-weight:500">Aa</b><span><i>Hanken Grotesk</i>Body text</span></div>
+    <div class="ty"><b style="font-family:'JetBrains Mono';font-weight:600">482</b><span><i>JetBrains Mono</i>IDs, codes, numbers</span></div>
+  </div>
+  <style>
+    .sw{height:180px;border-radius:20px;padding:20px 22px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+    .sw b{font-family:'Space Grotesk';font-weight:600;font-size:22px;color:#fff}
+    .sw span{font-variant-ligatures:none;font-family:'JetBrains Mono';font-size:13px;color:rgba(255,255,255,.85)}
+    .ty{height:130px;border-radius:20px;padding:0 26px;display:flex;align-items:center;gap:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)}
+    .ty b{font-size:60px;line-height:1;background:linear-gradient(95deg,#a9a6ff,#5fe0f5);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .ty span{display:flex;flex-direction:column;color:var(--muted);font-size:16px;gap:4px}
+    .ty i{font-style:normal;color:var(--text);font-family:'Space Grotesk';font-weight:600;font-size:22px}
+  </style>
+</section>
+
 <!-- ========== SLIM BANNERS (libs) ========== -->
 <template id="slim-t">
   <div class="rings" style="width:900px;height:900px;right:-260px;top:-300px"><i></i><i></i><i></i><i></i></div>

@@ -12,7 +12,7 @@ const require = createRequire(join(process.cwd(), 'noop.js'));
 const { chromium } = require('playwright');
 
 const ids = process.argv.slice(2);
-const all = ['hero-org', 'hero-desktop', 'hero-mobile', 'hero-relay', 'steps', 'stats',
+const all = ['hero-org', 'hero-desktop', 'hero-mobile', 'hero-relay', 'steps', 'stats', 'family', 'palette',
   'hero-core', 'hero-proto', 'hero-web', 'hero-design'];
 const out = join(here, 'out');
 mkdirSync(out, { recursive: true });

@@ -13,6 +13,8 @@ indigo + cyan, Space Grotesk / Hanken Grotesk / JetBrains Mono, pulse-ring logo.
 | `hero-core`, `hero-proto`, `hero-web`, `hero-design` | `.github/assets/hero.png` in that repo |
 | `steps` | `steps.png` (desktop, mobile, org profile) |
 | `stats` | `stats.png` (desktop, org profile) |
+| `family` | `family.png` (pulsar-core, pulsar-proto) |
+| `palette` | `palette.png` (design) |
 
 ## Regenerate
 
