@@ -243,6 +243,85 @@ h1 .grad{background:linear-gradient(95deg,#a9a6ff 0%,#7d7aff 35%,#5fe0f5 100%);-
   </style>
 </section>
 
+<!-- ========== FEATURE PANELS (built from FEATS below) ========== -->
+<style>
+  .feat{width:1600px;height:600px}
+  .feat .lead{position:absolute;left:80px;top:0;bottom:0;width:440px;display:flex;flex-direction:column;justify-content:center;gap:22px}
+  .feat .lead h1{font-size:60px}
+  .feat .lead .sub{font-size:20px}
+  .feat .grid{position:absolute;left:580px;right:70px;top:70px;bottom:70px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:18px}
+  .tile{border-radius:20px;padding:24px 24px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;justify-content:flex-end;gap:6px;position:relative}
+  .tile .ic{position:absolute;top:24px;left:24px;width:54px;height:54px;border-radius:15px;display:grid;place-items:center;background:var(--tbg);border:1px solid var(--tbd);color:var(--tfg)}
+  .tile .ic svg{width:28px;height:28px;stroke-width:1.9}
+  .tile b{font-family:'Space Grotesk';font-weight:600;font-size:23px;letter-spacing:-.015em}
+  .tile span{color:var(--muted);font-size:16px;line-height:1.35}
+  .feat.cy{--tbg:rgba(19,179,212,.14);--tbd:rgba(95,224,245,.40);--tfg:#5fe0f5}
+  .feat.in{--tbg:rgba(91,87,224,.20);--tbd:rgba(125,122,255,.50);--tfg:#b4b2ff}
+  .feat.gr{--tbg:rgba(40,200,120,.12);--tbd:rgba(94,230,154,.38);--tfg:#6ff0a8}
+</style>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script>
+const FEATS = {
+  'feat-gaming': ['cy', 'Game streaming', 'Play your PC <span class="grad">from anywhere.</span>', 'The couch, a laptop, another room. It feels like sitting at your PC.', [
+    ['monitor-play', '4K · 240 fps', '120, 144, 165 Hz screens too'],
+    ['sun', '10-bit HDR', 'H.264 · H.265 · AV1'],
+    ['wifi', 'Adapts to your Wi-Fi', 'Tests the link, keeps tuning'],
+    ['sparkles', 'Upscaling', 'AMD FSR · NVIDIA RTX · Intel VSR'],
+    ['gamepad-2', 'A real DualSense', 'Triggers, haptics, mic, headset'],
+    ['volume-2', 'Game sound', 'Opus up to 320 kb/s or lossless'],
+  ]],
+  'feat-remote': ['in', 'Remote desktop', 'Help, support, <span class="grad">work remotely.</span>', 'Everything you need to use another computer as if it were yours.', [
+    ['app-window', 'Tabs & split screen', 'Tear off, merge, side by side'],
+    ['folder-up', 'File transfer', 'Browse, download, drag and drop'],
+    ['clipboard-copy', 'Shared clipboard', 'Copy here, paste there'],
+    ['messages-square', 'Chat & voice', 'Text chat and your microphone'],
+    ['monitor', 'Every monitor', 'Pick one, follows hot-plugging'],
+    ['hand', 'You stay in charge', 'Take control back in one click'],
+  ]],
+  'feat-security': ['gr', 'Security', 'Private <span class="grad">by design.</span>', 'Nobody gets in without your say, and nobody in the middle can read it.', [
+    ['lock-keyhole', 'Always encrypted', 'End to end, every session'],
+    ['key-round', 'Forward secrecy', 'PAKE key exchange'],
+    ['user-check', 'Allow or deny', 'One-time or fixed password'],
+    ['shield-check', 'Two-factor codes', 'TOTP for any access mode'],
+    ['route', 'Direct first', 'Relay only when it has to'],
+    ['server', 'Your own server', 'Self-host the relay'],
+  ]],
+  'feat-m-control': ['in', 'Control a computer', 'Your PC, <span class="grad">at your fingertips.</span>', 'Built for touch, with everything a mouse and keyboard can do.', [
+    ['mouse-pointer-click', 'Mouse or touch mode', 'Trackpad cursor or tap to click'],
+    ['keyboard', 'Keyboard included', 'Ctrl+Alt+Del, or plug in a real one'],
+    ['folder-up', 'Files & clipboard', 'Send files, copy and paste'],
+    ['mic', 'Sound & mic', 'Hear the PC, talk through it'],
+    ['monitor', 'Any screen, any way', 'Fit, fill, portrait, landscape'],
+    ['layers', 'Several at once', 'Quick switcher, saved devices'],
+  ]],
+  'feat-m-gaming': ['cy', 'Game streaming', 'PC games, <span class="grad">on your phone.</span>', 'Pick a game from your PC and play it with a real controller.', [
+    ['library', 'Your game library', 'Desktop, one screen or one game'],
+    ['gamepad-2', 'Real controllers', 'Bluetooth or USB, with rumble'],
+    ['battery-charging', 'Battery shown', 'Know when to charge the pad'],
+    ['gauge', 'Quality presets', 'Data saver to low latency'],
+    ['activity', 'Live stats', 'fps, ping and loss on screen'],
+    ['tv', 'Android TV', 'The whole app on the D-pad'],
+  ]],
+  'feat-m-share': ['gr', 'Share & stay safe', 'Get help, <span class="grad">stay in control.</span>', 'Let someone you trust help on your phone, on your terms.', [
+    ['share-2', 'Share your screen', 'Let them see and tap for you'],
+    ['user-check', 'You approve', 'See who is in, disconnect any time'],
+    ['lock-keyhole', 'Always encrypted', 'End to end, every session'],
+    ['shield-check', 'Passwords & 2FA', 'One-time, permanent, unattended'],
+    ['radio-tower', 'Relay on the phone', 'A Pulsar server for your Wi-Fi'],
+    ['languages', '4 languages', 'EN · TR · RU · KK, updates itself'],
+  ]],
+};
+for (const [id, [tone, eyebrow, title, sub, tiles]] of Object.entries(FEATS)) {
+  const s = document.createElement('section');
+  s.id = id; s.className = 'feat ' + tone;
+  s.innerHTML = `<div class="rings" style="width:900px;height:900px;left:-420px;top:-150px"><i></i><i></i><i></i><i></i></div>
+    <div class="lead"><div class="eyebrow">${eyebrow}</div><h1>${title}</h1><p class="sub">${sub}</p></div>
+    <div class="grid">${tiles.map(([ic, b, t]) => `<div class="tile"><div class="ic"><i data-lucide="${ic}"></i></div><b>${b}</b><span>${t}</span></div>`).join('')}</div>`;
+  document.body.appendChild(s);
+}
+addEventListener('DOMContentLoaded', () => lucide.createIcons());
+</script>
+
 <!-- ========== SLIM BANNERS (libs) ========== -->
 <template id="slim-t">
   <div class="rings" style="width:900px;height:900px;right:-260px;top:-300px"><i></i><i></i><i></i><i></i></div>

@@ -13,6 +13,7 @@ const { chromium } = require('playwright');
 
 const ids = process.argv.slice(2);
 const all = ['hero-org', 'hero-desktop', 'hero-mobile', 'hero-relay', 'steps', 'stats', 'family', 'palette',
+  'feat-gaming', 'feat-remote', 'feat-security', 'feat-m-control', 'feat-m-gaming', 'feat-m-share',
   'hero-core', 'hero-proto', 'hero-web', 'hero-design'];
 const out = join(here, 'out');
 mkdirSync(out, { recursive: true });

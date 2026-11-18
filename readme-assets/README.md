@@ -15,6 +15,8 @@ indigo + cyan, Space Grotesk / Hanken Grotesk / JetBrains Mono, pulse-ring logo.
 | `stats` | `stats.png` (desktop, org profile) |
 | `family` | `family.png` (pulsar-core, pulsar-proto) |
 | `palette` | `palette.png` (design) |
+| `feat-gaming`, `feat-remote`, `feat-security` | pulsar-desktop `.github/assets/` |
+| `feat-m-control`, `feat-m-gaming`, `feat-m-share` | pulsar-mobile `.github/assets/` |
 
 ## Regenerate
 
